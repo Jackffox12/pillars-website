@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pillars Waitlist</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            font-size: clamp(32px, 4vw, 24px);
+            margin-bottom: 1vh; /* Reduced from 5vh */
+            line-height: 1.4;
+        }
+        h1 .larger {
+            font-size: clamp(20px, 6vw, 32px);
+            display: block;
+            margin-top: 2vh; /* Added spacing between the two lines */
+        }
+        .blue-text {
+            color: #40a4f4; /* Added the specific blue color */
+        }
+        input, button {
+            background-color: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 15px;
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .row input {
+            width: calc(50% - 5px);
+        }
+        button {
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        button:hover {
+            background-color: white;
+            color: black;
+        }
+        button:active {
+            background-color: #89CFF0; /* Baby blue */
+            border-color: #89CFF0;
+            color: black;
+        }
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('form').submit(function(e) {
+                e.preventDefault();
+                var formData = {
+                    'name': $('input[type=text]').val(),
+                    'email': $('input[type=email]').val(),
+                    'phone': $('input[type=tel]').val()
+                };
+
+                $.ajax({
+                    url: 'https://script.google.com/macros/s/AKfycbxFAdUuMLPqm_7XfeJn-yDLwf_jHZof3LuKdMOfUkUEVpJjKP9N5U95Z2o2ab1sPoVQ/exec',
+                    type: 'POST',
+                    data: formData,
+                    success: function(data) {
+                        alert('Thank you for joining our waitlist!');
+                        $('form')[0].reset();
+                    },
+                    error: function(err) {
+                        alert('There was an error. Please try again later.');
+                    }
+                });
+            });
+
+            const logo = $('.logo');
+            const g = 200; // acceleration due to gravity (m/s^2)
+            const fps = 60; // frames per second
+            const initialVelocity = 0; // initial velocity (m/s)
+            const restitution = 0.6; // energy loss on each bounce
+
+            let velocity = initialVelocity;
+            let position = 0;
+            let lastTime = performance.now();
+
+            function animate(currentTime) {
+                const deltaTime = (currentTime - lastTime) / 1000; // convert to seconds
+                lastTime = currentTime;
+
+                velocity += g * deltaTime;
+                position += velocity * deltaTime;
+
+                const maxPosition = window.innerHeight - logo.height();
+
+                if (position >= maxPosition) {
+                    position = maxPosition;
+                    velocity = -velocity * restitution;
+                }
+
+                logo.css('top', position + 'px');
+
+                if (Math.abs(velocity) > 0.1 || position < maxPosition) {
+                    requestAnimationFrame(animate);
+                }
+            }
+
+            // Start the animation after a short delay
+            setTimeout(() => {
+                requestAnimationFrame(animate);
+            }, 500);
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Everyone needs a <span class="blue-text">Nudge</span><br><span class="larger">Join our waitlist</span></h1>
+        <form>
+            <input type="text" placeholder="Name" required>
+            <div class="row">
+                <input type="email" placeholder="Email" required>
+                <input type="tel" placeholder="(800) 800-8000" required>
+            </div>
+            <button type="submit">Early access 08/23/24</button>
+        </form>
+        <div class="logo">
+            <img src="assets/logo-white.png" alt="Pillars Logo">
+        </div>
+    </div>
+</body>
+</html>
