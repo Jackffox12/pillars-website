@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no,  user-scalable=no,  height=device-height">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no,  user-scalable=no,  height=device-heigh">
     <title>Join Pillars</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -83,6 +84,7 @@
             color: #555;
         }
     </style>
+    <script type="module" src="log.js"></script>
 </head>
 <body>
     <div class="logo">
@@ -97,8 +99,8 @@
             <div class="form-group">
                 <h2>Join Wait list</h2>
                 <p class="Smalltext">Enter your Phone number to be notified</p>
-                <input type="text" placeholder="Phone number">
-                <button>Sign Up</button>
+                <input type="text" placeholder="Phone number" id="phone-number">
+                <button id="sign-up">Sign Up</button>
             </div>
         </div>
     </div>
