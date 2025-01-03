@@ -49,7 +49,7 @@ async function setPhoneNumberCount() {
     console.log(phoneNumberCount.textContent);
     const count = await fetchPhoneNumberCount();
     console.log("count: ", await count);
-    phoneNumberCount.textContent = count+defaultNumber || defaultNumber;
+    phoneNumberCount.textContent = count+defaultNumber;
     
 }
 setPhoneNumberCount();
